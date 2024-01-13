@@ -17,9 +17,10 @@ export default function ChessGame() {
       }
     }
 
-    function onDrop(source, target) {
+    function onDrop(source, target, piece) {
       try {
-        const result = makeAMove({ from: source, to: target});
+        const promotion = piece[1].toLowerCase();
+        const result = makeAMove({ from: source, to: target, promotion: promotion});
         if (result === null) return false;
         if (game.isGameOver()) {
           console.log("game over")
