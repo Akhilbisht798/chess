@@ -1,13 +1,41 @@
 import { Chess } from "chess.js";
+import { useState } from "react";
 import { Chessboard } from "react-chessboard";
 
 export default function ChessGame() {
-    function makeAMove() {}
+    const [game, setGame] = useState(new Chess());
+
+    function makeAMove(moves) {
+      try {
+        const gameCopy = new Chess(game.fen());
+        const result = gameCopy.move(moves);
+        setGame(gameCopy);
+        console.log(result)
+        return result;
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    function onDrop(source, target) {
+      try {
+        const result = makeAMove({ from: source, to: target});
+        if (result === null) return false;
+        if (game.isGameOver()) {
+          console.log("game over")
+        }
+        return true; 
+      } catch (err) {
+        console.log(err);
+      }
+    }
     
     return (
         <div className="w-2/6 h-2/3">
-            <Chessboard id="board" />
+            <Chessboard 
+              position={game.fen()} 
+              onPieceDrop={onDrop}
+            />
         </div>
-    )
-
+    );
 }
