@@ -10,10 +10,9 @@ export default function ChessGame() {
         const gameCopy = new Chess(game.fen());
         const result = gameCopy.move(moves);
         setGame(gameCopy);
-        console.log(result)
         return result;
       } catch (err) {
-        console.log(err);
+        console.log("Wrong Move!");
       }
     }
 
@@ -23,7 +22,7 @@ export default function ChessGame() {
         const result = makeAMove({ from: source, to: target, promotion: promotion});
         if (result === null) return false;
         if (game.isGameOver()) {
-          console.log("game over")
+          console.log("game over");
         }
         return true; 
       } catch (err) {
