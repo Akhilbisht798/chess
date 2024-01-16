@@ -20,9 +20,9 @@ export default function ChessGame({ fen, color }) {
     function onDrop(source, target, piece) {
       try {
         const promotion = piece[1].toLowerCase();
-        // if (game.turn() !== piece[0] || game.turn() !== color) {
-        //   return false;
-        // }
+        if (game.turn() !== piece[0] || game.turn() !== color) {
+          return false;
+        }
         
         const result = makeAMove({ from: source, to: target, promotion: promotion});
         if (result === null) return false;

@@ -17,6 +17,7 @@ io.on('connection', (socket) => {
   console.log('a user connected');
   socket.on('move-made', (data) => {
 	console.log(data);
+	socket.emit('opponent-move', data);
   })
 });
 
