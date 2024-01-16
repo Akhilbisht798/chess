@@ -15,7 +15,9 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
   console.log('a user connected');
-	socket.emit("msg", "message")
+  socket.on('move-made', (data) => {
+	console.log(data);
+  })
 });
 
 server.listen(port, () => {

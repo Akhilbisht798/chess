@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="min-h-full">
       <div className="text-3xl font-bold underline">This is  Chess</div>
-      <ChessGame />
+      <ChessGame color={'w'}/>
     </div>
   )
 }
