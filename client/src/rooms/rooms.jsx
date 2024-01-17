@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useColor, useRoom } from "../state/fenState";
+import socket from "../socket/socket";
 
 export default function Rooms() {
     const { changeRoom } = useRoom();
@@ -9,11 +10,13 @@ export default function Rooms() {
     function onCreateRoom() {
         changeColor('w'); 
         changeRoom(room)
+        socket.emit('room', room);
     }
 
     function onJoinRoom() {
         changeColor('b'); 
-        changeRoom(room)
+        changeRoom(room);
+        socket.emit('room', room);
     }
 
     return (

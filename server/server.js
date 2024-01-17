@@ -15,9 +15,15 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
   console.log('a user connected');
+
+  socket.on('room', (room) => {
+	socket.join(room);
+	console.log('joined room ', room);
+  })
+
   socket.on('move-made', (data) => {
-	console.log(data);
-	socket.emit('opponent-move', data);
+	console.log(data)
+	socket.broadcast.to(data.room).emit('opponent-move', data.fen)
   })
 });
 
