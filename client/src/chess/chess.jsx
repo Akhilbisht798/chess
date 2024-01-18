@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Chessboard } from "react-chessboard";
 import socket from "../socket/socket";
 import { useRoom } from "../state/fenState";
+import whiteKing from '../assets/whiteKing.png';
+import blackKing from '../assets/blackKing.png';
 
 export default function ChessGame({ fen, color }) {
     const [game, setGame] = useState(new Chess(fen));
@@ -34,13 +36,22 @@ export default function ChessGame({ fen, color }) {
         console.log(err);
       }
     }
+    const kingImage = game.turn() === 'b' ? blackKing : whiteKing;
 
     return (
+      <div>
         <div className="w-2/6 h-2/3">
-              <Chessboard 
-                position={game.fen()} 
-                onPieceDrop={onDrop}
-              />
+          <Chessboard 
+            position={game.fen()} 
+            onPieceDrop={onDrop}
+            orientation={color === 'w' ? 'white' : 'black'}
+          />
         </div>
+
+        <div className="flex items-center gap-6">
+          <p className="text-xl font-bold">Current Turn - </p>
+          <img src={kingImage} alt="king" className="w-16 h-16"/>
+        </div>
+      </div>
     );
 }

@@ -9,7 +9,7 @@ function App() {
   
   return (
     <div className="min-h-full">
-      <div className="text-3xl font-bold underline">This is  Chess</div>
+      <div className="text-3xl font-bold underline text-center">This is  Chess</div>
       {
         room !== ''?
           <Game/> :
