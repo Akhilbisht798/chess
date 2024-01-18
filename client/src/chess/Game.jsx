@@ -7,7 +7,6 @@ export default function Game() {
     const { fen, changeFen } = useFen();
     const { color } = useColor();
 
-    console.log(color);
     useEffect(() => {
         socket.on('opponent-move', (data) => {
             console.log('updating opponent move', data);

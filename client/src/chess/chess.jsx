@@ -7,7 +7,6 @@ import { useRoom } from "../state/fenState";
 export default function ChessGame({ fen, color }) {
     const [game, setGame] = useState(new Chess(fen));
     const { room } = useRoom();
-    console.log("re rendering the game- ", game.fen());
 
     function makeAMove(moves) {
       try {
@@ -25,8 +24,6 @@ export default function ChessGame({ fen, color }) {
       try {
         const promotion = piece[1].toLowerCase();
         if (game.turn() !== color) {
-          console.log("Current Turn- ", game.turn());
-          console.log("Your Color- ", color);
           return false;
         }
         
