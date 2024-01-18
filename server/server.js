@@ -3,8 +3,12 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
+require('dotenv').config()
+
+const clientUrl = process.env.CLIENT_URL || "http://localhost:5173";
+
 const io = new Server(server, {
-	cors: "http://localhost:5173"
+	cors: clientUrl
 });
 
 const port = process.env.PORT || 5000;
@@ -16,14 +20,18 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
   console.log('a user connected');
 
+  // Chess
   socket.on('room', (room) => {
-	socket.join(room);
-	console.log('joined room ', room);
+	  socket.join(room);
   })
 
   socket.on('move-made', (data) => {
-	console.log(data)
-	socket.broadcast.to(data.room).emit('opponent-move', data.fen)
+	  socket.broadcast.to(data.room).emit('opponent-move', data.fen)
+  })
+
+  // Chat
+  socket.on('send-chat', (data) => {
+	  socket.broadcast.to(data.room).emit('recive-chat', data.chat);
   })
 });
 
