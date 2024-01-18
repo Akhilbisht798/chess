@@ -9,14 +9,14 @@ export default function Rooms() {
 
     function onCreateRoom() {
         changeColor('w'); 
-        changeRoom(room)
         socket.emit('room', room);
+        changeRoom(room)
     }
 
     function onJoinRoom() {
         changeColor('b'); 
-        changeRoom(room);
         socket.emit('room', room);
+        changeRoom(room);
     }
 
     return (
